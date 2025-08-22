@@ -13,7 +13,11 @@
             background: #f4f9f4;
         }
 
-        h1, h2, h3, h4, h5 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
             color: #2e7d32;
         }
 
@@ -80,7 +84,9 @@
             font-weight: bold;
         }
 
-        input, select, button {
+        input,
+        select,
+        button {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -198,6 +204,7 @@
             <button type="submit">Generate Report</button>
         </form>
 
+
         <!-- Report container -->
         <div id="report"></div>
     </main>
@@ -245,10 +252,10 @@
             return risks;
         }
 
-        function riskColor(value) { 
-            if (value <= 30) return "safe"; 
-            if (value <= 60) return "moderate"; 
-            return "risk"; 
+        function riskColor(value) {
+            if (value <= 30) return "safe";
+            if (value <= 60) return "moderate";
+            return "risk";
         }
 
         document.getElementById("cropForm").addEventListener("submit", async e => {
@@ -260,9 +267,9 @@
 
             const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location},South Africa&days=7`);
             const data = await res.json();
-            if (!data.location) { 
-                document.getElementById("report").innerHTML = "<p>❌ Location not found.</p>"; 
-                return; 
+            if (!data.location) {
+                document.getElementById("report").innerHTML = "<p>❌ Location not found.</p>";
+                return;
             }
             const current = data.current;
             const forecast = data.forecast.forecastday;
@@ -330,11 +337,25 @@
     <p>${bestTime}</p>
     <p>💡 Notes: Monitor extreme weather, ensure irrigation/drainage, follow recommended nutrients.</p>
 </div>
+
 `;
 
             const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             tooltipTriggerList.map(el => new bootstrap.Tooltip(el));
         });
     </script>
+        <!-- WhatsApp Bot Card -->
+        <div class="card p-3" style="max-width: 800px; margin: 20px auto;">
+            <h3>🤖 Need Help? Chat with Croptrix AI Bot</h3>
+            <p>
+                Got farming questions or need instant advice?
+                Talk to our AI-powered assistant on WhatsApp!
+            </p>
+            <a href="https://api.whatsapp.com/send/?phone=15551476630&text=Hi+Bot&type=phone_number&app_absent=0"
+                target="_blank" class="btn btn-success">
+                💬 Chat on WhatsApp
+            </a>
+        </div>
 </body>
+
 </html>
