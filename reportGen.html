@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Croptrix AI Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* --- GLOBAL --- */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f9f4;
+        }
+
+        h1, h2, h3, h4, h5 {
+            color: #2e7d32;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: #2D5016;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #a7d7a7;
+        }
+
+        /* --- MAIN & FORM --- */
+        main {
+            padding: 40px 20px;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #2D5016;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #1b3a0f;
+        }
+
+        /* --- REPORT STYLING (kept from original card style) --- */
+        .card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .risk {
+            font-weight: bold;
+            color: red;
+        }
+
+        .safe {
+            font-weight: bold;
+            color: green;
+        }
+
+        .moderate {
+            font-weight: bold;
+            color: orange;
+        }
+
+        .tooltip-inner {
+            max-width: 250px;
+        }
+
+        #report {
+            max-width: 840px;
+            margin: 30px auto;
+        }
+
+        .tooltip-icon {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="logo">
+            <img src="logo-withoutbackground.png" alt="CropLogo">
+            Croptrix AI
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/index.html">Dashboard</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/reportGen.html">Report Generation</a></li>
+                <li><a href="/contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main>
+        <h1 class="text-center mb-4">🌱 Advanced Crop Advisory System – South Africa</h1>
+
+        <form id="cropForm">
+            <label for="farmerName">Farmer Name:</label>
+            <input type="text" id="farmerName" required>
+
+            <label for="cropType">Crop Type:</label>
+            <select id="cropType" required>
+                <option value="">--Select a Crop--</option>
+                <option>Maize</option>
+                <option>Wheat</option>
+                <option>Sorghum</option>
+                <option>Barley</option>
+                <option>Rice</option>
+                <option>Potatoes</option>
+                <option>Tomatoes</option>
+                <option>Onions</option>
+                <option>Cabbage</option>
+                <option>Carrots</option>
+                <option>Spinach</option>
+                <option>Beans</option>
+                <option>Peas</option>
+                <option>Sunflower</option>
+                <option>Soybeans</option>
+                <option>Cotton</option>
+                <option>Groundnuts</option>
+                <option>Chillies</option>
+                <option>Pumpkin</option>
+                <option>Butternut</option>
+                <option>Grapes</option>
+                <option>Apples</option>
+                <option>Oranges</option>
+                <option>Mangoes</option>
+                <option>Bananas</option>
+            </select>
+
+            <label for="location">Location (South Africa):</label>
+            <input type="text" id="location" placeholder="e.g. Pretoria" required>
+
+            <button type="submit">Generate Report</button>
+        </form>
+
+        <!-- Report container -->
+        <div id="report"></div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_KEY = "59e8f7556b814174b4b93539252208";
+
+        const cropData = {
+            "Maize": { moisture: "20-30%", ph: "5.5-7.0", tempMin: 18, tempMax: 27, npk: "High N, Medium P, High K" },
+            "Wheat": { moisture: "15-25%", ph: "6.0-7.5", tempMin: 10, tempMax: 25, npk: "Medium NPK" },
+            "Sorghum": { moisture: "10-20%", ph: "5.5-7.5", tempMin: 20, tempMax: 30, npk: "Medium NPK" },
+            "Barley": { moisture: "15-25%", ph: "6.0-7.5", tempMin: 8, tempMax: 25, npk: "Medium NPK" },
+            "Rice": { moisture: "70-90%", ph: "5.0-6.5", tempMin: 20, tempMax: 30, npk: "High NPK" },
+            "Potatoes": { moisture: "60-80%", ph: "5.0-6.0", tempMin: 15, tempMax: 20, npk: "High NPK" },
+            "Tomatoes": { moisture: "50-70%", ph: "6.0-6.8", tempMin: 18, tempMax: 27, npk: "High NPK" },
+            "Onions": { moisture: "40-60%", ph: "6.0-7.0", tempMin: 13, tempMax: 24, npk: "Medium NPK" },
+            "Cabbage": { moisture: "60-80%", ph: "6.0-7.5", tempMin: 15, tempMax: 20, npk: "High N, Medium P" },
+            "Carrots": { moisture: "40-60%", ph: "6.0-7.0", tempMin: 15, tempMax: 20, npk: "Medium N, Medium K" },
+            "Spinach": { moisture: "60-80%", ph: "6.0-7.0", tempMin: 15, tempMax: 20, npk: "High N, Medium P" },
+            "Beans": { moisture: "50-70%", ph: "6.0-7.5", tempMin: 18, tempMax: 24, npk: "Medium NPK" },
+            "Peas": { moisture: "50-70%", ph: "6.0-7.5", tempMin: 13, tempMax: 18, npk: "Medium NPK" },
+            "Sunflower": { moisture: "15-25%", ph: "6.0-7.5", tempMin: 20, tempMax: 30, npk: "Medium NPK" },
+            "Soybeans": { moisture: "50-70%", ph: "6.0-7.5", tempMin: 18, tempMax: 28, npk: "Medium NPK" },
+            "Cotton": { moisture: "20-40%", ph: "5.8-8.0", tempMin: 20, tempMax: 30, npk: "Medium NPK" },
+            "Groundnuts": { moisture: "30-50%", ph: "5.5-7.0", tempMin: 20, tempMax: 30, npk: "Medium NPK" },
+            "Chillies": { moisture: "50-70%", ph: "6.0-6.8", tempMin: 20, tempMax: 30, npk: "Medium NPK" },
+            "Pumpkin": { moisture: "60-80%", ph: "6.0-6.8", tempMin: 18, tempMax: 27, npk: "Medium NPK" },
+            "Butternut": { moisture: "60-80%", ph: "6.0-6.8", tempMin: 18, tempMax: 27, npk: "Medium NPK" },
+            "Grapes": { moisture: "20-40%", ph: "5.5-7.0", tempMin: 15, tempMax: 30, npk: "Medium NPK" },
+            "Apples": { moisture: "50-70%", ph: "5.5-7.0", tempMin: 13, tempMax: 24, npk: "Medium NPK" },
+            "Oranges": { moisture: "50-70%", ph: "5.5-6.5", tempMin: 20, tempMax: 30, npk: "Medium NPK" },
+            "Mangoes": { moisture: "40-60%", ph: "5.5-7.5", tempMin: 24, tempMax: 30, npk: "Medium NPK" },
+            "Bananas": { moisture: "70-90%", ph: "5.5-6.5", tempMin: 26, tempMax: 30, npk: "High N, Medium K" }
+        };
+
+        function calculateRisks(current, soil) {
+            const risks = {};
+            risks.drought = current.precip_mm < 2 ? 80 : (current.precip_mm < 5 ? 50 : 10);
+            risks.flooding = current.precip_mm > 20 ? 90 : (current.precip_mm > 10 ? 50 : 10);
+            risks.cold = current.temp_c < soil.tempMin ? Math.min(100, (soil.tempMin - current.temp_c) * 10) : 0;
+            risks.heat = current.temp_c > soil.tempMax ? Math.min(100, (current.temp_c - soil.tempMax) * 10) : 0;
+            risks.pests = (current.humidity > 80 && current.temp_c >= soil.tempMin && current.temp_c <= soil.tempMax) ? 70 : 20;
+            risks.wind = current.wind_kph > 25 ? 60 : 10;
+            return risks;
+        }
+
+        function riskColor(value) { 
+            if (value <= 30) return "safe"; 
+            if (value <= 60) return "moderate"; 
+            return "risk"; 
+        }
+
+        document.getElementById("cropForm").addEventListener("submit", async e => {
+            e.preventDefault();
+            const name = document.getElementById("farmerName").value;
+            const crop = document.getElementById("cropType").value;
+            const location = document.getElementById("location").value;
+            const soil = cropData[crop];
+
+            const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location},South Africa&days=7`);
+            const data = await res.json();
+            if (!data.location) { 
+                document.getElementById("report").innerHTML = "<p>❌ Location not found.</p>"; 
+                return; 
+            }
+            const current = data.current;
+            const forecast = data.forecast.forecastday;
+            const risks = calculateRisks(current, soil);
+
+            const plantableDays = forecast.filter(d => d.day.avgtemp_c >= soil.tempMin && d.day.avgtemp_c <= soil.tempMax && d.day.daily_chance_of_rain <= 80).map(d => d.date);
+            const bestTime = plantableDays.length > 0 ? `Optimal days: ${plantableDays.join(", ")}` : "No optimal days in next 7 days.";
+
+            const tooltipIcon = '<span class="tooltip-icon" data-bs-toggle="tooltip" title="pH measures acidity/alkalinity; 7 is neutral.">ℹ️</span>';
+
+            document.getElementById("report").innerHTML = `
+<div class="card p-3">
+    <h3>👨‍🌾 Farmer: ${name}</h3>
+    <h4>🌾 Crop: ${crop}</h4>
+    <h5>📍 Location: ${data.location.name}, ${data.location.region}</h5>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h4>🌱 Soil & Crop Requirements</h4>
+            <ul>
+                <li>Moisture: ${soil.moisture}</li>
+                <li>pH Range: ${soil.ph} ${tooltipIcon}</li>
+                <li>Temperature: ${soil.tempMin}°C - ${soil.tempMax}°C</li>
+                <li>Nutrients (NPK): ${soil.npk}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h4>☀ Current Weather</h4>
+            <ul>
+                <li>Temperature: ${current.temp_c}°C</li>
+                <li>Humidity: ${current.humidity}%</li>
+                <li>Wind: ${current.wind_kph} km/h</li>
+                <li>Rainfall: ${current.precip_mm} mm</li>
+                <li>Condition: ${current.condition.text}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card p-3">
+    <h4>📊 Quantitative Risk Assessment</h4>
+    <ul>
+        <li class="${riskColor(risks.drought)}">Drought Risk: ${risks.drought}%</li>
+        <li class="${riskColor(risks.flooding)}">Flooding Risk: ${risks.flooding}%</li>
+        <li class="${riskColor(risks.cold)}">Cold/Frost Stress: ${risks.cold}%</li>
+        <li class="${riskColor(risks.heat)}">Heat Stress: ${risks.heat}%</li>
+        <li class="${riskColor(risks.pests)}">Pest/Disease Risk: ${risks.pests}%</li>
+        <li class="${riskColor(risks.wind)}">Wind Damage Risk: ${risks.wind}%</li>
+    </ul>
+</div>
+
+<div class="card p-3">
+    <h4>📅 7-Day Forecast</h4>
+    <ul>
+        ${forecast.map(f => `<li>${f.date}: High ${f.day.maxtemp_c}°C / Low ${f.day.mintemp_c}°C, Rain chance: ${f.day.daily_chance_of_rain}%</li>`).join("")}
+    </ul>
+</div>
+
+<div class="card p-3">
+    <h4>🌟 Best Time to Plant</h4>
+    <p>${bestTime}</p>
+    <p>💡 Notes: Monitor extreme weather, ensure irrigation/drainage, follow recommended nutrients.</p>
+</div>
+`;
+
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(el => new bootstrap.Tooltip(el));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Croptrix AI Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="logo">
+            <img src="logo-withoutbackground.png" alt="CropLogo">
+            Croptrix AI
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/index.html">Dashboard</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/reportGen.html">Report Generation</a></li>
+                <li><a href="/contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h1>Welcome to Croptrix AI 🌱</h1>
+            <p>Your guide to improving crop yields and managing your farm effectively in South Africa.</p>
+        </section>
+
+        <!-- Info Cards -->
+        <section class="cards-container">
+            <div class="card">
+                <h3>🌦 Weather Awareness</h3>
+                <p>Monitor rainfall, temperature, and wind conditions to plan planting, irrigation, and harvesting. 
+                <span class="tooltip-icon" data-bs-toggle="tooltip" title="Irrigation refers to supplying water to crops.">ℹ️</span></p>
+            </div>
+            <div class="card">
+                <h3>🌱 Soil Management</h3>
+                <p>Maintain proper moisture, pH, and nutrient levels for healthy crops. Use compost or organic fertilizers to enrich the soil.
+                <span class="tooltip-icon" data-bs-toggle="tooltip" title="pH measures acidity or alkalinity of the soil; neutral is 7.">ℹ️</span></p>
+            </div>
+            <div class="card">
+                <h3>🦗 Pest & Disease Control</h3>
+                <p>Identify early signs of pests and diseases. Use sustainable methods to minimize chemical usage and protect crop health.</p>
+            </div>
+            <div class="card">
+                <h3>📅 Crop Planning</h3>
+                <p>Choose the right season and crop type for your region. Crop rotation and diversification can increase soil fertility and reduce risks.</p>
+            </div>
+            <div class="card">
+                <h3>💧 Water Conservation</h3>
+                <p>Use water efficiently with drip irrigation or rainwater harvesting. Reduce wastage while keeping your crops healthy.</p>
+            </div>
+            <div class="card">
+                <h3>📊 Farm Analytics</h3>
+                <p>Track your crop growth, soil health, and weather conditions. Data-driven decisions improve yield and reduce costs.</p>
+            </div>
+        </section>
+
+        <!-- Terminology Section -->
+        <section id="terminology" style="margin-top:50px;">
+            <h2>📚 Important Terminology</h2>
+            <ul>
+                <li><b>Irrigation</b>: Supplying water to crops to maintain healthy growth.</li>
+                <li><b>pH</b>: A scale measuring soil acidity or alkalinity (7 = neutral).</li>
+                <li><b>Crop Rotation</b>: Alternating crops in the same field to maintain soil fertility.</li>
+                <li><b>Compost</b>: Decayed organic matter used to improve soil nutrients.</li>
+                <li><b>Pest</b>: Organisms that damage crops like insects, rodents, or weeds.</li>
+                <li><b>Fertilizer</b>: Substances added to soil to provide nutrients to crops.</li>
+            </ul>
+        </section>
+
+        <!-- Tips Section -->
+        <section id="tips" style="margin-top:50px;">
+            <h2>💡 Farming Tips</h2>
+            <ul>
+                <li>Check your local weather forecast regularly.</li>
+                <li>Test your soil before planting to understand its needs.</li>
+                <li>Use organic fertilizers and compost for sustainable farming.</li>
+                <li>Implement crop rotation to prevent soil depletion.</li>
+                <li>Monitor pests and diseases early to reduce damage.</li>
+                <li>Keep records of planting dates, rainfall, and yields for future planning.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Croptrix AI – Supporting South African Farmers
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Activate Bootstrap tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(el => new bootstrap.Tooltip(el));
+    </script>
+</body>
+
+</html>

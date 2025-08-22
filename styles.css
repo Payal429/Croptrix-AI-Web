@@ -1,0 +1,183 @@
+ body {
+            font-family: Arial, sans-serif;
+            background: #f4f9f4;
+        }
+
+        h1, h2, h3, h4, h5 {
+            color: #2e7d32;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: #2D5016;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #a7d7a7;
+        }
+
+        main {
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome-section h1 {
+            font-size: 36px;
+            color: #2D5016;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: #2D5016;
+        }
+
+        .tooltip-icon {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        footer {
+            background: #2D5016;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+
+        /* --- MAIN & FORM --- */
+        main {
+            padding: 40px 20px;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #2D5016;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #1b3a0f;
+        }
+
+        /* --- REPORT STYLING (kept from original card style) --- */
+        .card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .risk {
+            font-weight: bold;
+            color: red;
+        }
+
+        .safe {
+            font-weight: bold;
+            color: green;
+        }
+
+        .moderate {
+            font-weight: bold;
+            color: orange;
+        }
+
+        .tooltip-inner {
+            max-width: 250px;
+        }
+
+        #report {
+            max-width: 840px;
+            margin: 30px auto;
+        }
+
+        .tooltip-icon {
+            cursor: pointer;
+            margin-left: 5px;
+        }
