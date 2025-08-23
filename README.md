@@ -89,7 +89,7 @@ CroptrixAI-Website/
 ## 📬 Contact
 
 For feedback, suggestions, or collaboration:  
-📧 Email: support@croptrixai.co.za  
+📧 Email: support@croptrix.ai  
 🌐 Website: [https://croptrix-ai.tiiny.site](https://croptrix-ai.tiiny.site)  
 
 ---
@@ -99,3 +99,5 @@ For feedback, suggestions, or collaboration:
 This project is licensed under the **MIT License** 
 
 ---
+
+_Croptrix AI – Helping farmers make smart decisions with AI and real-time data._
