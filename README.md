@@ -90,7 +90,7 @@ CroptrixAI-Website/
 
 For feedback, suggestions, or collaboration:  
 📧 Email: support@croptrix.ai  
-🌐 Website: [https://croptrix-ai.tiiny.site](https://croptrix-ai.tiiny.site)  
+🌐 Website: [https://croptrix-ai-web.onrender.com/](https://croptrix-ai-web.onrender.com/)  
 
 ---
 
